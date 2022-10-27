@@ -83,8 +83,15 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
-
+let findAverage: GetNumber = (data) =>{
+  let sum: number = 0;
+  let count: number = 0;
+  data.forEach(x => {
+    sum += x.age;
+    count++;
+  });
+  return sum/count;
+};
 //console.log(findAverage(userData));
 
 // Question 2: Data Handling
@@ -92,7 +99,7 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => data.findIndex(x => x.city === "SF"); // Code here
 
 //console.log(findIndexAns(userData));
 
@@ -100,7 +107,7 @@ let findIndexAns: GetNumber; // Code here
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, minAge) => data.filter(x => ((x.age > minAge) && (x.state === "CA"))); // Code here
 
 //console.log(findCAOverN(userData, 25));
 
@@ -108,7 +115,7 @@ let findCAOverN: GetVolunteers; // Code here
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data) => data.find(x => x.city === "SB"); // Code here
 
 //console.log(findSBStaff(userData));
 
@@ -125,7 +132,7 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer;// Code here
 
 // let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
@@ -150,7 +157,7 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let name, age, city;// Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
