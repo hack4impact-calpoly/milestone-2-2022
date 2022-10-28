@@ -84,13 +84,9 @@ const userData: Volunteer[] = [
 */
 type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) =>{
-  let sum: number = 0;
-  let count: number = 0;
-  data.forEach(x => {
-    sum += x.age;
-    count++;
-  });
-  return sum/count;
+  let sum = 0;
+  data.forEach(x => sum += x.age);
+  return sum/data.length;
 };
 //console.log(findAverage(userData));
 
@@ -132,10 +128,10 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer;// Code here
+let copyVolunteer: CopyVolunteer = (vol) => ({...vol}); //Code here
 
 // let kyleClone: Volunteer = copyVolunteer(kyle);
-//console.log(kyleClone);
+// console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
@@ -146,10 +142,10 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (vol, updates) => ({...vol, ...updates}); // Code here
 
-// let kyleNew = updateVolunteer(kyleClone);
-//console.log(kyleNew);
+// kyleNew = updateVolunteer(kyleClone, updatedLocation);
+// console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
@@ -157,12 +153,12 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city;// Code here
+  let [name, age, city] = [vol.name, vol.age, vol.city];// Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
 // let kyleInfo = getVolunteerInfo(kyleNew);
-//console.log(kyleInfo);
+// console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the first user from 
@@ -171,9 +167,16 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data: Volunteer[]) => {
+  let thisVol = data.find(x => ((x.city === "SLO") && (x.age > 40))); //Create new volunteer from found volunteer
+  if(thisVol !== undefined){ //Check if volunteer with the paramaters exists before editing
+    return updateVolunteer(thisVol, {position: "staff"}); //Update position of volunteer
+  }else{
+    return undefined;
+  }
+}; // Code here
 
-//console.log(daBigTest(userData));
+// console.log(daBigTest(userData));
 
 export {
   Volunteer,
