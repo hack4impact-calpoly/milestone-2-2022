@@ -168,12 +168,8 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
  */
 
 let daBigTest: GetVolunteer = (data: Volunteer[]) => {
-  let thisVol = data.find(x => ((x.city === "SLO") && (x.age > 40))); //Create new volunteer from found volunteer
-  if(thisVol !== undefined){ //Check if volunteer with the paramaters exists before editing
-    return updateVolunteer(thisVol, {position: "staff"}); //Update position of volunteer
-  }else{
-    return undefined;
-  }
+  const thisVol = data.find(x => ((x.city === "SLO") && (x.age > 40))); //Create new volunteer from found volunteer
+  return thisVol ? updateVolunteer(thisVol, {position: "staff"}) : undefined;
 }; // Code here
 
 // console.log(daBigTest(userData));
