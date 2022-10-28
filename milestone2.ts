@@ -187,7 +187,7 @@ console.log(kyleInfo);
 
 let daBigTest: GetVolunteer = (data) => {
   const slo_data: Volunteer | undefined = data.find(volunteer => (volunteer.city === 'SLO' && volunteer.age > 40) ? volunteer : undefined);
-  if (slo_data){
+  if (slo_data){  //evaluates to false if undefined
     return {...slo_data, position:'staff'}
   }
   return slo_data
