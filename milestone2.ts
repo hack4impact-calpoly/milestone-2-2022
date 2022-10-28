@@ -83,34 +83,39 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (data) => {
+  const ages: number[] = data.map(x => x.age);
+  let sum: number = ages.reduce((prev, cur) => prev + cur);
+  return sum/data.length;
+}; // Define lambda function here
 
-//console.log(findAverage(userData));
+console.log(findAverage(userData));
 
 // Question 2: Data Handling
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => 
+  data.findIndex(volunteer => volunteer.city === "SF"); // Code here
 
-//console.log(findIndexAns(userData));
+console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, n) => data.filter(volunteer => volunteer.age > n && volunteer.state === "CA"); // Code here
 
-//console.log(findCAOverN(userData, 25));
+console.log(findCAOverN(userData, 25));
 
 // Question 4: Searching Data
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = data => data.find(volunteer => volunteer.city === "SB"); // Code here
 
-//console.log(findSBStaff(userData));
+console.log(findSBStaff(userData));
 
 // Question 5: Spread Operator Part 1
 let kyle: Volunteer = {
@@ -125,24 +130,26 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = vol => {return {...vol}}; // Code here
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
-//console.log(kyleClone);
+let kyleClone: Volunteer = copyVolunteer(kyle);
+console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
  */
 let updatedLocation = { city: "Seattle", state: "WA" };
-let kyleNew: Volunteer;
+//let kyleNew: Volunteer;
 type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (vol, updates) => {
+  return {...vol, ...updates}
+}; // Code here
 
-// let kyleNew = updateVolunteer(kyleClone);
-//console.log(kyleNew);
+let kyleNew: Volunteer = updateVolunteer(kyleClone, updatedLocation);
+console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
@@ -150,7 +157,7 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let [name, age, city] = [vol.name, vol.age, vol.city]; // Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -164,9 +171,12 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data) => {
+  let person = data.find(volunteer => volunteer.city === "SLO" && volunteer.age > 40);
+  return (typeof person === 'undefined' ? person : updateVolunteer(person, {position: "staff"}));
+}; // Code here
 
-//console.log(daBigTest(userData));
+console.log(daBigTest(userData));
 
 export {
   Volunteer,
