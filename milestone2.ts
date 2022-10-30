@@ -1,5 +1,4 @@
 // This is the data we'll be working with!
-
 interface Volunteer {
   name: string;
   age: number;
@@ -84,7 +83,7 @@ const userData: Volunteer[] = [
 */
 type GetNumber = (data: Volunteer[]) => number;
 let findAverage:GetNumber=(userData)=>userData.reduce((acc, cur)=>acc+cur.age, 0) / userData.length; // Define lambda function here
-
+ 
 // console.log(findAverage)
 console.log(findAverage(userData));
 
