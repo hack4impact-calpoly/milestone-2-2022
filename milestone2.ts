@@ -83,7 +83,13 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (data) => {
+  let avg = 0; 
+  for(let i = 0; i < data.length; i++){
+    avg = avg + data[i].age;
+  }
+  return avg/data.length; 
+}; // Define lambda function here
 
 //console.log(findAverage(userData));
 
@@ -92,7 +98,22 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+//type GetCity = (data: Volunteer[]) => string;
+
+let findIndexAns: GetNumber = (data) => {
+  let i = 0;
+  let j = data[i].city;
+  
+  while((j !== "SF" && i !== data.length -1)){
+    i++; 
+    j = data[i].city;
+  }
+  if(j === "SF"){
+    return i; 
+  }else{
+    return -1; 
+  }
+}; // Code here
 
 //console.log(findIndexAns(userData));
 
@@ -100,15 +121,33 @@ let findIndexAns: GetNumber; // Code here
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, minAge) =>{
+  //console.log(minAge);
+  let arr1 = data.filter((data) => {
+    if(data.position === "volunteer"){
+      if(data.state === "CA"){
+        if(data.age > minAge){
+          return true;
+        }
+        return false;
+      }
+      return false;
+    }
+    return false;
+  })
+  return arr1; 
+}; // Code here
 
-//console.log(findCAOverN(userData, 25));
+//console.log(findCAOverN(userData, 32));
 
 // Question 4: Searching Data
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data) =>{
+  const find = data.find(data => data.city === "SB");
+  return find; 
+}; // Code here
 
 //console.log(findSBStaff(userData));
 
@@ -125,9 +164,12 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (kyle) =>{ 
+  const ret = {...kyle};
+  return ret;
+}; // Code here
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
@@ -139,10 +181,14 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (vol, updates) =>{
+  const ret = {...vol, email: updates.email, city:updates.city, state: updates.state};
 
-// let kyleNew = updateVolunteer(kyleClone);
-//console.log(kyleNew);
+  return ret;
+}; // Code here
+
+kyleNew = updateVolunteer(kyleClone, updatedLocation);
+console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
