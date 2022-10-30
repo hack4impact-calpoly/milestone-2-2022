@@ -83,9 +83,15 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (userData) => {
+  let sumOfAges = 0
+  userData.forEach(element => {
+    sumOfAges += element.age
+  })
+  return sumOfAges/(userData.length);
+}; 
 
-//console.log(findAverage(userData));
+console.log(findAverage(userData));
 
 // Question 2: Data Handling
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
