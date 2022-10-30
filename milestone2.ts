@@ -83,12 +83,13 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber = (userData) => {
+let findAverage: GetNumber = (data) => {
   let sumOfAges = 0
-  userData.forEach(element => {
+  // Iterates through object array to add sum of all ages
+  data.forEach(element => {
     sumOfAges += element.age
   })
-  return sumOfAges/(userData.length);
+  return sumOfAges/(data.length);
 }; 
 
 console.log(findAverage(userData));
@@ -98,9 +99,12 @@ console.log(findAverage(userData));
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => {
+  // findIndex function returns the index at which "SF" is found, otherwise, the function will return -1
+  return data.findIndex(a => a.city === "SF")
+}; 
 
-//console.log(findIndexAns(userData));
+console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
