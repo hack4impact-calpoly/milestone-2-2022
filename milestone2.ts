@@ -86,8 +86,8 @@ type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) => {
   let sumOfAges = 0
   // Iterates through object array to add sum of all ages
-  data.forEach(element => {
-    sumOfAges += element.age
+  data.forEach((a: Volunteer) => {
+    sumOfAges += a.age
   })
   return sumOfAges/(data.length);
 }; 
@@ -101,7 +101,7 @@ console.log(findAverage(userData));
 */
 let findIndexAns: GetNumber = (data) => {
   // findIndex function returns the index at which "SF" is found, otherwise, the function will return -1
-  return data.findIndex(a => a.city === "SF")
+  return data.findIndex((a: Volunteer) => a.city === "SF");
 }; 
 
 console.log(findIndexAns(userData));
@@ -110,9 +110,11 @@ console.log(findIndexAns(userData));
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data,minAge)=> {
+  return data.filter((a: Volunteer) => a.state === "CA" && a.age > minAge);
+}; // Code here
 
-//console.log(findCAOverN(userData, 25));
+console.log(findCAOverN(userData, 30));
 
 // Question 4: Searching Data
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
