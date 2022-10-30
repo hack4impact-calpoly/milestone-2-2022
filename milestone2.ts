@@ -74,6 +74,16 @@ const userData: Volunteer[] = [
     city: "SF",
     state: "CA",
   },
+  /*
+  {
+    name: "Bob",
+    age: 55,
+    email: "bob@email.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  */
 ];
 
 // Questions Start Here
@@ -83,7 +93,10 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (volunteers) => {
+  return volunteers.map(v => v.age) // get all ages of volunteers
+  .reduce((x, y) => x + y) / volunteers.length; //add all ages and divide by number of volunteers
+ } 
 
 //console.log(findAverage(userData));
 
@@ -92,7 +105,9 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (volunteers) => {
+  return volunteers.findIndex(x => x.city === "SF");
+}; 
 
 //console.log(findIndexAns(userData));
 
@@ -100,7 +115,9 @@ let findIndexAns: GetNumber; // Code here
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (volunteers, age) => {
+  return volunteers.filter(x => x.state === "CA" && x.age > age);
+};
 
 //console.log(findCAOverN(userData, 25));
 
@@ -108,7 +125,9 @@ let findCAOverN: GetVolunteers; // Code here
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (volunteers) => {
+  return volunteers.find(x => x.city === "SB")
+}; 
 
 //console.log(findSBStaff(userData));
 
@@ -125,23 +144,27 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (person) => {
+  return {...person}
+} 
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
  */
 let updatedLocation = { city: "Seattle", state: "WA" };
-let kyleNew: Volunteer;
+
 type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (person, newinfo) => {
+  return {...person, ...newinfo}
+}; 
 
-// let kyleNew = updateVolunteer(kyleClone);
+let kyleNew = updateVolunteer(kyleClone, updatedLocation);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
@@ -150,11 +173,11 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let {name, age, city} = vol;
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
+let kyleInfo = getVolunteerInfo(kyleNew);
 //console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
@@ -164,9 +187,12 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (volunteers) => {
+  let original: Volunteer | undefined = volunteers.find(x => x.city === "SLO" && x.age > 40);
+  return (original === undefined ? undefined : {...original, ...{position: "staff"} });
+}
 
-//console.log(daBigTest(userData));
+console.log(daBigTest(userData));
 
 export {
   Volunteer,
