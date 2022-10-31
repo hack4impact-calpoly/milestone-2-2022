@@ -83,7 +83,13 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (data) => {  
+  let total = 0;
+  for (let i = 0; i < data.length; i++) {
+    total += data[i].age;
+  }
+  return total / data.length;
+};
 
 //console.log(findAverage(userData));
 
@@ -92,7 +98,9 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => {
+  return data.findIndex((volunteer) => volunteer.city === "SF");
+};
 
 //console.log(findIndexAns(userData));
 
@@ -100,7 +108,11 @@ let findIndexAns: GetNumber; // Code here
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, minAge) => {
+  return data.filter((volunteer) => {
+    return volunteer.state === "CA" && volunteer.age > minAge;
+  });
+};
 
 //console.log(findCAOverN(userData, 25));
 
@@ -108,7 +120,11 @@ let findCAOverN: GetVolunteers; // Code here
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data) => {
+  return data.find((volunteer) => {
+    return volunteer.city === "SB";
+  });
+};
 
 //console.log(findSBStaff(userData));
 
@@ -125,23 +141,27 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (vol) => {
+  return { ...vol };
+};
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
  */
 let updatedLocation = { city: "Seattle", state: "WA" };
-let kyleNew: Volunteer;
+//let kyleNew: Volunteer;
 type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (vol, updates) => {
+  return { ...vol, ...updates };
+};
 
-// let kyleNew = updateVolunteer(kyleClone);
+let kyleNew = updateVolunteer(kyleClone, updatedLocation);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
@@ -150,11 +170,12 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  // declare variables for name, age, and city using object destructuring
+  let {name, age, city} = {...vol};
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
+let kyleInfo = getVolunteerInfo(kyleNew);
 //console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
@@ -164,7 +185,23 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let findCityOverN = (data: Volunteer[], city: string, minAge: number) => {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].city === city && data[i].age > minAge) {
+      return data[i];
+    }
+  }
+  return undefined;
+};
+
+let daBigTest: GetVolunteer = (data) => {
+  let person = findCityOverN(data, "SLO", 40);
+  if (person) {
+    return updateVolunteer(person, { position: "staff" });
+  } else {
+    return undefined;
+  }
+};
 
 //console.log(daBigTest(userData));
 
