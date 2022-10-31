@@ -78,7 +78,7 @@ const userData: Volunteer[] = [
 // Questions Start Here
 
 // Question 1: Lambda Functions
-/* Define a new lambda function that finds the average age of the users in the data. 
+/* Define a new lambda function that finds the average age of the people in the data. 
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
@@ -97,7 +97,7 @@ let findIndexAns: GetNumber =(data)=>data.findIndex(d=>d.city==='SF'); // Code h
 console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
-/* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
+/* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
 let findCAOverN: GetVolunteers=(data, minAge)=>data.filter(d=>d.age>minAge && d.state=='CA' ); // Code here
@@ -105,7 +105,7 @@ let findCAOverN: GetVolunteers=(data, minAge)=>data.filter(d=>d.age>minAge && d.
 console.log(findCAOverN(userData, 25));
 
 // Question 4: Searching Data
-/* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
+/* Use data handling function(s) to find the first person from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
 let findSBStaff: GetVolunteer=data=>data.find(d=>d.city==='SB'); // Code here
@@ -163,7 +163,7 @@ let kyleInfo = getVolunteerInfo(kyleNew);
 console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
-/* Use all the skills we've covered today to get the first user from 
+/* Use all the skills we've covered today to get the *first* person from 
 /* San Luis Obispo (SLO) over the age of 40, and return an updated
 /* version of them with their position set to staff. If no one meets
 /* these criteria, return undefined
