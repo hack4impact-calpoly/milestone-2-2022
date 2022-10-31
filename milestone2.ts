@@ -85,7 +85,7 @@ const userData: Volunteer[] = [
 type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) => {
   return data.reduce((prev, curr) => prev + curr.age, 0) / data.length;
-}; // Define lambda function here
+};
 
 // console.log(findAverage(userData));
 
@@ -96,7 +96,7 @@ let findAverage: GetNumber = (data) => {
 */
 let findIndexAns: GetNumber = (data) => {
   return data.findIndex(x => x.city === "SF");
-}; // Code here
+};
 
 // console.log(findIndexAns(userData));
 
@@ -108,7 +108,7 @@ let findCAOverN: GetVolunteers = (data, minAge) => {
   return data
         .filter(x => x.state === "CA")
         .filter(x => x.age >= minAge);
-}; // Code here
+};
 
 // console.log(findCAOverN(userData, 25));
 
@@ -118,7 +118,7 @@ let findCAOverN: GetVolunteers = (data, minAge) => {
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
 let findSBStaff: GetVolunteer = (data) => {
   return data.find(x => x.city === "SB");
-}; // Code here
+};
 
 //console.log(findSBStaff(userData));
 
@@ -138,7 +138,7 @@ type CopyVolunteer = (vol: Volunteer) => Volunteer;
 let copyVolunteer: CopyVolunteer = (vol) => {
   const kyleClone = {...vol};
   return kyleClone;
-}; // Code here
+};
 
 // let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
@@ -155,7 +155,7 @@ type UpdateVolunteer = (
 let updateVolunteer: UpdateVolunteer = (vol, updates) => {
   kyleNew = {...vol, ...updates};
   return kyleNew;
-}; // Code here
+};
 
 // let kyleNew = updateVolunteer(kyleClone);
 //console.log(kyleNew);
@@ -166,7 +166,7 @@ let updateVolunteer: UpdateVolunteer = (vol, updates) => {
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  const {name, age, city} = vol; // Code here
+  const {name, age, city} = vol;
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -182,8 +182,8 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 
 let daBigTest: GetVolunteer = (data) => {
   const vol = data
-                  .filter(x => x.age > 40)
-                  .find(x => x.city === "SLO");
+              .filter(x => x.age > 40)
+              .find(x => x.city === "SLO");
   if (vol !== undefined) {
     let updatedVol: Volunteer;
     let updates: Partial<Volunteer>;
@@ -191,7 +191,7 @@ let daBigTest: GetVolunteer = (data) => {
     updatedVol = {...vol, ...updates};
     return updatedVol;
   };
-}; // Code here
+};
 
 //console.log(daBigTest(userData));
 
