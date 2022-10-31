@@ -168,12 +168,12 @@ kyleNew = updateVolunteer(kyleClone,updatedLocation);
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let [name, age, city] = [vol.name, vol.age,vol.city]; // Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
-//console.log(kyleInfo);
+let kyleInfo = getVolunteerInfo(kyleNew);
+// console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the first user from 
@@ -182,9 +182,13 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data) => {
+  let user = data.filter((a: Volunteer) => a.city === "SLO").find((b: Volunteer) => b.age > 40)
+  // if user exists, will change position to "staff", otherwise will return undefined
+  return user ? {...user, position: "staff"}: undefined;
+}; // Code here
 
-//console.log(daBigTest(userData));
+console.log(daBigTest(userData));
 
 export {
   Volunteer,
