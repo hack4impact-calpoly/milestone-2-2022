@@ -8,7 +8,195 @@ interface Volunteer {
   city: string;
   state: string;
 }
+const volunteers: Volunteer[] = [
+  {
+    name: "Dino",
+    age: 27,
+    email: "Dino_Boyle@hotmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Elyse",
+    age: 36,
+    email: "Elyse_Abernathy70@yahoo.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Cicero",
+    age: 45,
+    email: "Cicero_Monahan90@yahoo.com",
+    position: "volunteer",
+    city: "SB",
+    state: "CA",
+  },
+  {
+    name: "Harmony",
+    age: 27,
+    email: "Harmony68@gmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Melody",
+    age: 32,
+    email: "Melody.Abbott@yahoo.com",
+    position: "staff",
+    city: "SF",
+    state: "CA",
+  },
+  {
+    name: "Damian",
+    age: 63,
+    email: "Damian.Herzog@gmail.com",
+    position: "volunteer",
+    city: "Denver",
+    state: "CO",
+  },
+  {
+    name: "Florence",
+    age: 20,
+    email: "Florence87@gmail.com",
+    position: "staff",
+    city: "SD",
+    state: "CA",
+  },
+  {
+    name: "Grayson",
+    age: 59,
+    email: "Grayson41@hotmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Alexzander",
+    age: 31,
+    email: "Alexzander23@hotmail.com",
+    position: "staff",
+    city: "LA",
+    state: "CA",
+  },
+  {
+    name: "Brycen",
+    age: 14,
+    email: "Brycen.Cormier26@hotmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Pearl",
+    age: 34,
+    email: "Pearl_Sporer@yahoo.com",
+    position: "volunteer",
+    city: "Denver",
+    state: "CO",
+  },
+  {
+    name: "Vern",
+    age: 57,
+    email: "Vern57@gmail.com",
+    position: "staff",
+    city: "LA",
+    state: "CA",
+  },
+  {
+    name: "Annetta",
+    age: 49,
+    email: "Annetta.Wilkinson93@gmail.com",
+    position: "volunteer",
+    city: "SF",
+    state: "CA",
+  },
+  {
+    name: "Delaney",
+    age: 30,
+    email: "Delaney.Kris41@gmail.com",
+    position: "volunteer",
+    city: "Denver",
+    state: "CO",
+  },
+  {
+    name: "Clint",
+    age: 46,
+    email: "Clint.Lemke@hotmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+];
 
+const volunteers2: Volunteer[] = [
+  {
+    name: "Ali",
+    age: 15,
+    email: "Ali_Romaguera@hotmail.com",
+    position: "staff",
+    city: "Denver",
+    state: "CO",
+  },
+  {
+    name: "Patsy",
+    age: 42,
+    email: "Patsy_Hansen@hotmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Skye",
+    age: 47,
+    email: "Skye.Hudson80@gmail.com",
+    position: "volunteer",
+    city: "Seattle",
+    state: "WA",
+  },
+  {
+    name: "Kenya",
+    age: 35,
+    email: "Kenya_Johns8@yahoo.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Rossie",
+    age: 63,
+    email: "Rossie.Purdy@hotmail.com",
+    position: "staff",
+    city: "Seattle",
+    state: "WA",
+  },
+  {
+    name: "Liliane",
+    age: 34,
+    email: "Liliane_Cronin@gmail.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Alden",
+    age: 55,
+    email: "Alden.Emmerich@yahoo.com",
+    position: "volunteer",
+    city: "SLO",
+    state: "CA",
+  },
+  {
+    name: "Milton",
+    age: 70,
+    email: "Milton_Kiehn7@yahoo.com",
+    position: "volunteer",
+    city: "SB",
+    state: "CA",
+  },
+];
 const userData: Volunteer[] = [
   {
     name: "Joe",
@@ -121,24 +309,13 @@ let findIndexAns: GetNumber = (data) => {
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers = (data, minAge) =>{
+let findCAOverN: GetVolunteers = (data, n) =>{
   //console.log(minAge);
-  let arr1 = data.filter((data) => {
-    if(data.position === "volunteer"){
-      if(data.state === "CA"){
-        if(data.age > minAge){
-          return true;
-        }
-        return false;
-      }
-      return false;
-    }
-    return false;
-  })
-  return arr1; 
+    data = data.filter(x => ((x.position === "volunteer" || x.position === "staff") && (x.age > n) && (x.state === "CA")));
+    return data; 
 }; // Code here
 
-//console.log(findCAOverN(userData, 32));
+//console.log(findCAOverN(volunteers, 0));
 
 // Question 4: Searching Data
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
@@ -182,13 +359,39 @@ type UpdateVolunteer = (
   updates: Partial<Volunteer>
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer = (vol, updates) =>{
-  const ret = {...vol, email: updates.email, city:updates.city, state: updates.state};
+  //const ret = {...vol, email: updates.email, city:updates.city, state: updates.state};
+  const myName = "name";
+  let volr;
+  if(myName in updates){
+    volr = {name: updates.name, ...vol};
+    return volr;
+  }
+  const myAge = "age";
+  if(myAge in updates){
+    volr = {...vol, age: updates.age};
+    return volr;
+  }
+  const myEmail = "email";
+  if(myEmail in updates){
+    volr =  {...vol, email: updates.email};
+    return volr;
+  }
+  const myPosition = "position";
+  if(myPosition in updates){
+    volr = {...vol, position: updates.position};
+    return volr;
+  }
 
-  return ret;
+  const myCity = "city";
+  const myState = "state";
+
+  volr = {...vol, city: updates.city, state: updates.state};
+  return volr; 
+
 }; // Code here
 
-kyleNew = updateVolunteer(kyleClone, updatedLocation);
-console.log(kyleNew);
+//kyleNew = updateVolunteer(kyleClone, updatedLocation);
+//console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
@@ -197,6 +400,9 @@ console.log(kyleNew);
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
   let name, age, city; // Code here
+  name = vol.name;
+  age = vol.age;
+  city = vol.city;
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -210,7 +416,16 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (vol) => {
+
+  let data = vol.find(x => x.age > 40 && x.city === "SLO");
+  if(data === undefined){
+    return undefined;
+  }
+  data.position = "staff";
+  return data; 
+
+}; // Code here
 
 //console.log(daBigTest(userData));
 
