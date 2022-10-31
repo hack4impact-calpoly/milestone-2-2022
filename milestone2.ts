@@ -171,7 +171,7 @@ var kyleNew = updateVolunteer(kyleClone, kyleClone);
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let [name, age, city] = [kyleNew.name, kyleNew.age, kyleNew.city];
+  let [name, age, city] = [vol.name, vol.age, vol.city];
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -185,18 +185,14 @@ let kyleInfo = getVolunteerInfo(kyleNew);
 /* these criteria, return undefined
  */
 
-let updatedPosition = {position: "staff"}
+let updatedPosition:{position: "staff" | "volunteer"} = {position: "staff"}
 let daBigTest: GetVolunteer = (data) => {
-  const city = data.filter(x => x.city === "SLO");
-  const age = city.filter(y => y.age > 40);
-  if (age.length === 0){
-    return undefined
-  }
-  let cop = {...age, ...updatedPosition};
-  return cop;
+  const city = [data.find(x => x.city == "SLO")]
+  const age = city.find(y => y.age > 40)
+  return age
 }
 
-console.log(daBigTest(userData));
+//console.log(daBigTest(userData));
 
 export {
   Volunteer,
