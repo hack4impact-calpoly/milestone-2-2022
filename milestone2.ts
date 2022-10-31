@@ -192,15 +192,15 @@ console.log(kyleInfo);
 /* these criteria, return undefined
  */
 
-let updatedPosition = { position: "staff" };
+let updatedPosition:{position: "staff" | "volunteer"} = { position: "staff" };
 let daBigTest: GetVolunteer = (data) => {
   let target = data.find(vol => vol.city === "SLO" && vol.age > 40)
-  if(target == -1) {
+  if(target === undefined) {
     return undefined
   }
-  return {...target, ...updatedPosition}
+  return updateVolunteer(target, updatedPosition)
 } 
-console.log(daBigTest(userData);
+console.log(daBigTest(userData));
 
 export {
   Volunteer,
