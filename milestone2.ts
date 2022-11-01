@@ -157,7 +157,7 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer = (data) => {
+let updateVolunteer: UpdateVolunteer = (data, updatedLocation) => {
   let copy = {...data, ...updatedLocation}
   return copy
 }
