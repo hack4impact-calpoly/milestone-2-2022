@@ -187,15 +187,15 @@ console.log(kyleInfo);
 
 let daBigTest: GetVolunteer = (data) =>
 {
-  let filter1 = data.filter(x => x.city === "SLO");
-  let person = filter1.findIndex(x=>x.age >= 40);
+
+  let person = data.findIndex(x=> x.city === "SLO" && x.age >= 40);
   if(person === -1)
   {
     return undefined;
   }
   else
   {
-    data[person].position = "staff"
+    data[person].position ="staff";
     return data[person];
   }
   
