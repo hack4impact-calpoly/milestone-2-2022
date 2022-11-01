@@ -133,15 +133,14 @@ let copyVolunteer: CopyVolunteer; // Code here
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
  */
-let updatedLocation = { city: "Seattle", state: "WA" };
-let kyleNew: Volunteer;
 type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer; // Code here
 
-// let kyleNew = updateVolunteer(kyleClone);
+// let updatedLocation = { city: "Seattle", state: "WA" };
+// let kyleNew = updateVolunteer(kyleClone, updatedLocation);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
