@@ -108,9 +108,9 @@ let findIndexAns: GetNumber = (data) => {
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers = (data) => {
+let findCAOverN: GetVolunteers = (data, minAge) => {
   const city = data.filter(x => x.state === "CA")
-  const ages = city.filter(y => y.age > 25)
+  const ages = city.filter(y => y.age > minAge)
   return ages
 }
 
@@ -162,7 +162,7 @@ let updateVolunteer: UpdateVolunteer = (data) => {
   return copy
 }
 
-var kyleNew = updateVolunteer(kyleClone, kyleClone);
+var kyleNew = updateVolunteer(kyleClone, updatedLocation);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
