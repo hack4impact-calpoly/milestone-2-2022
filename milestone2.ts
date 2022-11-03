@@ -86,9 +86,9 @@ const userData: Volunteer[] = [
 */
 type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) => {
-  const ages = data.filter(data => data.age)
-  const average = ages.reduce((sum, next) => sum + next.age, 0) / ages.length;
-  return average
+  const ages = data.filter(data => data.age) // filters array by age
+  const average = ages.reduce((sum, next) => sum + next.age, 0) / ages.length;  // traverses array and adds values together, then divides by number of items in array
+  return average  // returns avg age
 }; // Define lambda function here
 
 //console.log(findAverage(userData));
@@ -99,7 +99,7 @@ let findAverage: GetNumber = (data) => {
   Hint: Use a lambda function as a value
 */
 let findIndexAns: GetNumber = data => {
-  const index = data.findIndex(entry => entry.city === "SF")
+  const index = data.findIndex(entry => entry.city === "SF")  // finds the index of someone from SF in array
   return index
 }; // Code here
 
@@ -110,9 +110,9 @@ let findIndexAns: GetNumber = data => {
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
 let findCAOverN: GetVolunteers = (data, minAge) => {
-  const city_filter = data.filter(x => x.state === "CA")
-  const age_filter = city_filter.filter(x => x.age > minAge)
-  return age_filter
+  const city_filter = data.filter(x => x.state === "CA")  // creates array of students from CA
+  const age_filter = city_filter.filter(x => x.age > minAge) // further filters by age
+  return age_filter  // returns fully filtered array
 }; // Code here
 
 //console.log(findCAOverN(userData, 25));
@@ -122,7 +122,7 @@ let findCAOverN: GetVolunteers = (data, minAge) => {
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
 let findSBStaff: GetVolunteer = (data) => {
-  const city = data.find(x => x.city === "SB")
+  const city = data.find(x => x.city === "SB") // finds first volunteer from SB
   return city
 }; // Code here
 
@@ -142,8 +142,8 @@ let kyle: Volunteer = {
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
 let copyVolunteer: CopyVolunteer = (data) => {
-  let copy = {...data}
-  return copy
+  let copy = {...data} // copies volunteer into new variable
+  return copy  // returns new volunteer
 }; // Code here
 
 let kyleClone: Volunteer = copyVolunteer(kyle);
@@ -152,14 +152,14 @@ let kyleClone: Volunteer = copyVolunteer(kyle);
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
  */
-let kyleNew: Volunteer;
+let kyleNew: Volunteer; // creates a volunteer
 type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer = (data, updatedLocation) => {
-  let copy = {...data, ...updatedLocation}
-  return copy
+  let copy = {...data, ...updatedLocation} // creates new volunteer with data and updates
+  return copy  // returns new volunteer
 }; // Code here
 
 kyleNew = updateVolunteer(kyleClone, kyleClone);
@@ -171,8 +171,8 @@ kyleNew = updateVolunteer(kyleClone, kyleClone);
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let [name, age, city] = [vol.name, vol.age, vol.city]; // Code here
-  return `${name} is ${age} years old and lives in ${city}`;
+  let [name, age, city] = [vol.name, vol.age, vol.city]; // collects name age and city of object
+  return `${name} is ${age} years old and lives in ${city}`; // returns string with attributes
 };
 
 let kyleInfo = getVolunteerInfo(kyleNew);
@@ -185,15 +185,15 @@ let kyleInfo = getVolunteerInfo(kyleNew);
 /* these criteria, return undefined
  */
 let updatedPosition:{position: "staff" | "volunteer"} = {position: "staff"}
-
+// tells ts to change positions to staff
 let daBigTest: GetVolunteer = (data) => {
-  const city = data.filter(x => x.city === "SLO"); 
-  const age = city.find(x => x.age > 40);
+  const city = data.filter(x => x.city === "SLO"); // creates new array of people from slo
+  const age = city.find(x => x.age > 40);  // finds the first person older than 40
   if (age == undefined) {
-    return age
+    return age // returns undefined if no one is over 40
   }
-  let cop = {...age, ...updatedPosition}
-  return cop
+  let cop = {...age, ...updatedPosition} // creates a new object with regular attributes and updates position
+  return cop // returns new object
   
 }; // Code here
 
