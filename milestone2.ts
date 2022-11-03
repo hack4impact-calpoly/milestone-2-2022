@@ -79,11 +79,15 @@ const userData: Volunteer[] = [
 // Questions Start Here
 
 // Question 1: Lambda Functions
-/* Define a new lambda function that finds the average age of the people in the data. 
+/* Define a new lambda function that finds the average age of the users in the data. 
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (data) => {
+  const get_ages = data.filter(datas => datas.age) // get all ages
+  const avg = get_ages.reduce((total, next) => total + next.age, 0) / get_ages.length; // calculate avg
+  return avg
+}
 
 //console.log(findAverage(userData));
 
@@ -92,23 +96,33 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => {
+  const get_index = data.findIndex(x => x.city === "SF") // get index of first person from sf
+  return get_index
+}
 
 //console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
-/* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
+/* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, minAge) => {
+  const get_city = data.filter(x => x.state === "CA") // get all volunteers from CA
+  const get_ages = get_city.filter(x => x.age > minAge) // get all ages that are above min age
+  return get_ages
+}
 
 //console.log(findCAOverN(userData, 25));
 
 // Question 4: Searching Data
-/* Use data handling function(s) to find the first person from Santa Barbara (SB)
+/* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data) => {
+  const sb = data.find(x => x.city === "SB") // get first staff member from sb
+  return sb
+}
 
 //console.log(findSBStaff(userData));
 
@@ -125,22 +139,28 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (data) => {
+  let copy = {...data} // clone him
+  return copy
+}
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
  */
+let kyleNew: Volunteer;
 type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (data, updatedLocation) => {
+  let copy = {...data, ...updatedLocation}
+  return copy
+}
 
-// let updatedLocation = { city: "Seattle", state: "WA" };
-// let kyleNew = updateVolunteer(kyleClone, updatedLocation);
+kyleNew = updateVolunteer(kyleClone, kyleClone);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
@@ -149,21 +169,30 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let [name, age, city] = [vol.name, vol.age, vol.city]; // "destructure"
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
+let kyleInfo = getVolunteerInfo(kyleNew);
 //console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
-/* Use all the skills we've covered today to get the *first* person from 
+/* Use all the skills we've covered today to get the first user from 
 /* San Luis Obispo (SLO) over the age of 40, and return an updated
 /* version of them with their position set to staff. If no one meets
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let updatedPosition:{position: "staff" | "volunteer"} = {position: "staff"}
+let daBigTest: GetVolunteer = (data) => {
+  const city = data.filter(x => x.city === "SLO"); // get first person from SLO
+  const age = city.find(x => x.age > 40) // fmake sure they're over 40
+  if (age == undefined) {
+    return age
+  }
+  let copy = {...age, ...updatedPosition} // copy
+  return copy
+}
 
 //console.log(daBigTest(userData));
 
