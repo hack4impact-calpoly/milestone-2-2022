@@ -126,7 +126,7 @@ let kyle: Volunteer = {
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
 let copyVolunteer: CopyVolunteer = (vol: Volunteer) => ({...vol}); // Code here
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
@@ -137,11 +137,11 @@ type UpdateVolunteer = (
   updates: Partial<Volunteer>
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer = (vol: Volunteer, updates: Partial<Volunteer>) => 
-                                      ({..vol}); // Code here
+  ({...vol, ...updates}); // Code here
 
-// let updatedLocation = { city: "Seattle", state: "WA" };
-// let kyleNew = updateVolunteer(kyleClone, updatedLocation);
-//console.log(kyleNew);
+let updatedLocation = { city: "Seattle", state: "WA" };
+let kyleNew = updateVolunteer(kyleClone, updatedLocation);
+console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
@@ -150,6 +150,9 @@ let updateVolunteer: UpdateVolunteer = (vol: Volunteer, updates: Partial<Volunte
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
   let name, age, city; // Code here
+  name = vol.name;
+  age = vol.age;
+  city = vol.city;
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -163,7 +166,15 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data : Volunteer[]) => {
+  let vol, updates;
+  vol = data.find(x => (x.age > 40) && (x.city == "SLO"));
+  updates = {position: "staff"};
+  if (vol) {
+    return ({...vol, ...updates});
+  }
+  return undefined;
+}; // Code here
 
 //console.log(daBigTest(userData));
 
