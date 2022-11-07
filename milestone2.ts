@@ -99,7 +99,7 @@ let findIndexAns: GetNumber = (data: Volunteer[]) => data.findIndex((x) => x.cit
 /* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data: Volunteer[], n: Number) => data.filter(x=> (x.state == "CA") && (x.age > n)); // Code here
 
 //console.log(findCAOverN(userData, 25));
 
@@ -107,7 +107,7 @@ let findCAOverN: GetVolunteers; // Code here
 /* Use data handling function(s) to find the first person from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data: Volunteer[]) => data.find(x=> x.city == "SB"); // Code here
 
 //console.log(findSBStaff(userData));
 
