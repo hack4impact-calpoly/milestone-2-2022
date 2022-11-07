@@ -83,8 +83,7 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
-
+let findAverage: GetNumber = (data: Volunteer[]) => data.reduce((total, next) => total + next.age, 0) / data.length;
 //console.log(findAverage(userData));
 
 // Question 2: Data Handling
@@ -92,7 +91,7 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data: Volunteer[]) => data.findIndex((x) => x.city == "SF");
 
 //console.log(findIndexAns(userData));
 
