@@ -124,7 +124,7 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (vol: Volunteer) => ({...vol}); // Code here
 
 // let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
@@ -136,7 +136,8 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (vol: Volunteer, updates: Partial<Volunteer>) => 
+                                      ({..vol}); // Code here
 
 // let updatedLocation = { city: "Seattle", state: "WA" };
 // let kyleNew = updateVolunteer(kyleClone, updatedLocation);
