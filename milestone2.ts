@@ -84,9 +84,9 @@ const userData: Volunteer[] = [
 */
 type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) => {
-  const ages: number[] = data.map(x => x.age);
+  const ages: number[] = data.map((x) => x.age);
   let sum: number = ages.reduce((prev, cur) => prev + cur);
-  return sum/data.length;
+  return sum / data.length;
 }; // Define lambda function here
 
 console.log(findAverage(userData));
@@ -96,8 +96,8 @@ console.log(findAverage(userData));
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber = (data) => 
-  data.findIndex(volunteer => volunteer.city === "SF"); // Code here
+let findIndexAns: GetNumber = (data) =>
+  data.findIndex((volunteer) => volunteer.city === "SF"); // Code here
 
 console.log(findIndexAns(userData));
 
@@ -105,7 +105,8 @@ console.log(findIndexAns(userData));
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers = (data, n) => data.filter(volunteer => volunteer.age > n && volunteer.state === "CA"); // Code here
+let findCAOverN: GetVolunteers = (data, n) =>
+  data.filter((volunteer) => volunteer.age > n && volunteer.state === "CA"); // Code here
 
 console.log(findCAOverN(userData, 25));
 
@@ -113,7 +114,8 @@ console.log(findCAOverN(userData, 25));
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer = data => data.find(volunteer => volunteer.city === "SB"); // Code here
+let findSBStaff: GetVolunteer = (data) =>
+  data.find((volunteer) => volunteer.city === "SB"); // Code here
 
 console.log(findSBStaff(userData));
 
@@ -130,7 +132,9 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer = vol => {return {...vol}}; // Code here
+let copyVolunteer: CopyVolunteer = (vol) => {
+  return { ...vol };
+}; // Code here
 
 let kyleClone: Volunteer = copyVolunteer(kyle);
 console.log(kyleClone);
@@ -145,7 +149,7 @@ type UpdateVolunteer = (
   updates: Partial<Volunteer>
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer = (vol, updates) => {
-  return {...vol, ...updates}
+  return { ...vol, ...updates };
 }; // Code here
 
 let kyleNew: Volunteer = updateVolunteer(kyleClone, updatedLocation);
@@ -157,7 +161,7 @@ console.log(kyleNew);
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let [name, age, city] = [vol.name, vol.age, vol.city]; // Code here
+  let { name, age, email, position, city, state } = vol; // Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -172,8 +176,12 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
  */
 
 let daBigTest: GetVolunteer = (data) => {
-  let person = data.find(volunteer => volunteer.city === "SLO" && volunteer.age > 40);
-  return (typeof person === 'undefined' ? person : updateVolunteer(person, {position: "staff"}));
+  let person = data.find(
+    (volunteer) => volunteer.city === "SLO" && volunteer.age > 40
+  );
+  return typeof person === "undefined"
+    ? person
+    : updateVolunteer(person, { position: "staff" });
 }; // Code here
 
 console.log(daBigTest(userData));
