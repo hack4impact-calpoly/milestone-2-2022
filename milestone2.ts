@@ -83,18 +83,40 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber;
 
-//console.log(findAverage(userData));
+findAverage = (data: Volunteer[]) => {
+  let total = 0;
+  for(let i = 0; i < data.length; i++){
+    total+=data[i].age
+  }
+
+  let average = total/data.length;
+  return average
+}
+
+
+// Define lambda function here
+
+console.log(findAverage(userData));
 
 // Question 2: Data Handling
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber; 
 
-//console.log(findIndexAns(userData));
+findIndexAns = (data: Volunteer[]) =>{
+  for(let i = 0; i < data.length; i++){
+    if(data[i].city == "SF") return i
+  }
+  return -1
+}
+
+// Code here
+
+console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
@@ -102,7 +124,20 @@ let findIndexAns: GetNumber; // Code here
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
 let findCAOverN: GetVolunteers; // Code here
 
-//console.log(findCAOverN(userData, 25));
+findCAOverN = (data: Volunteer[], minAge: number) =>{
+  let tally = [];
+  
+  for(let i = 0; i < data.length; i++){
+    if(data[i].state == "CA" && data[i].age > minAge){
+      tally.push(data[i])
+    }
+  }
+
+  return tally
+}
+
+
+console.log(findCAOverN(userData, 25));
 
 // Question 4: Searching Data
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
@@ -110,7 +145,15 @@ let findCAOverN: GetVolunteers; // Code here
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
 let findSBStaff: GetVolunteer; // Code here
 
-//console.log(findSBStaff(userData));
+findSBStaff = (data: Volunteer[]) =>{
+  for(let i = 0; i < data.length; i++){
+    if(data[i].city == "SB") return data[i]
+  }
+  return undefined
+}
+
+
+console.log(findSBStaff(userData));
 
 // Question 5: Spread Operator Part 1
 let kyle: Volunteer = {
@@ -127,8 +170,12 @@ let kyle: Volunteer = {
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
 let copyVolunteer: CopyVolunteer; // Code here
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
-//console.log(kyleClone);
+copyVolunteer = (vol: Volunteer) => {
+  return {...vol}
+}
+
+let kyleClone: Volunteer = copyVolunteer(kyle);
+console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
@@ -141,8 +188,12 @@ type UpdateVolunteer = (
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer; // Code here
 
-// let kyleNew = updateVolunteer(kyleClone);
-//console.log(kyleNew);
+updateVolunteer = (vol: Volunteer, updates: Partial<Volunteer>) => {
+  return {...vol, ...updates}
+}
+
+kyleNew = updateVolunteer(kyleClone, updatedLocation);
+console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
@@ -150,12 +201,14 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let name = vol.name;
+  let age = vol.age;
+  let city = vol.city; // Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
-//console.log(kyleInfo);
+let kyleInfo = getVolunteerInfo(kyleNew);
+console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the first user from 
@@ -164,9 +217,19 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer;
 
-//console.log(daBigTest(userData));
+daBigTest = (data: Volunteer[]) => {
+  let vol:Volunteer = data[0];
+  for(let i = 0; i <data.length;i++){
+    if(data[i].city == "SLO" && data[i].age > 40){
+      return {...vol, ...{position: "staff"}}
+    }
+  }
+  return undefined
+}// Code here
+
+console.log(daBigTest(userData));
 
 export {
   Volunteer,
