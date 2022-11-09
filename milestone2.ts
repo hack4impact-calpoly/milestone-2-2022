@@ -83,7 +83,16 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (data) => {
+  let total = 0;
+  for (let i = 0; i< data.length; i ++){
+    total+=data[i].age;
+    //console.log(data[i].age);
+  }
+  return total/data.length;
+    
+
+}; // Define lambda function here
 
 //console.log(findAverage(userData));
 
@@ -93,7 +102,16 @@ let findAverage: GetNumber; // Define lambda function here
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => {
+  for (let i = 0; i < data.length; i++){
+    //console.log(data[i].city);
+    if(data[i].city == "SF"){
+      return i;
+    }
+  }
+  return -1;
+}; // Code here
+
 
 //console.log(findIndexAns(userData));
 
@@ -101,7 +119,14 @@ let findIndexAns: GetNumber; // Code here
 /* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, minAge) => {
+    //first need to filter for all people from ca
+    //console.log(data);
+    let ans = data.filter(data => data.state == "CA");
+    let final = ans.filter(ans => ans.age > minAge );
+    //ans =  ans.filter(ans => ans.age > minAge);
+    return final;
+}; //Code here
 
 //console.log(findCAOverN(userData, 25));
 
@@ -109,7 +134,13 @@ let findCAOverN: GetVolunteers; // Code here
 /* Use data handling function(s) to find the first person from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data) => {
+    for (let i = 0; i<data.length; i++){
+      if (data[i].city == "SB"){
+        return data[i];
+      }
+    }
+}; // Code here
 
 //console.log(findSBStaff(userData));
 
@@ -126,9 +157,24 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+// let copyVolunteer: CopyVolunteer = (vol) => {
+//     const volCopy: Volunteer = {
+//     name: vol.name,
+//     age: vol.age,
+//     email: vol.email,
+//     position: vol.position,
+//     city: vol.city,
+//     state: vol.state,
+//     };
+    
+//     return volCopy;
+// }; // Code here
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+let copyVolunteer: CopyVolunteer = (vol)=> {
+  return {...vol}
+};
+
+//let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
@@ -138,7 +184,14 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+
+let updateVolunteer: UpdateVolunteer = (vol, updates)=>{
+   return {...vol, ...updates};
+   
+  //how do I update a specific part of the vounteer without knowing which part 
+  //I'm accessing?
+
+}; // Code here
 
 // let updatedLocation = { city: "Seattle", state: "WA" };
 // let kyleNew = updateVolunteer(kyleClone, updatedLocation);
@@ -150,7 +203,11 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  let name, age, city;
+  name = vol.name;
+  age = vol.age;
+  city = vol.city;
+   // Code here
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
@@ -164,7 +221,16 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data) =>{
+  for (let i = 0; i<data.length; i++){
+    if (data[i].city == "SLO" && data[i].age>40){
+      data[i].position = "staff";
+      return data[i];
+    }
+  }
+  return undefined;
+
+}; // Code here
 
 //console.log(daBigTest(userData));
 
