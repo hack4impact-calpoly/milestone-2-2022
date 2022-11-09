@@ -359,33 +359,9 @@ type UpdateVolunteer = (
   updates: Partial<Volunteer>
 ) => Volunteer;
 let updateVolunteer: UpdateVolunteer = (vol, updates) =>{
-  //const ret = {...vol, email: updates.email, city:updates.city, state: updates.state};
-  const myName = "name";
   let volr;
-  if(myName in updates){
-    volr = {name: updates.name, ...vol};
-    return volr;
-  }
-  const myAge = "age";
-  if(myAge in updates){
-    volr = {...vol, age: updates.age};
-    return volr;
-  }
-  const myEmail = "email";
-  if(myEmail in updates){
-    volr =  {...vol, email: updates.email};
-    return volr;
-  }
-  const myPosition = "position";
-  if(myPosition in updates){
-    volr = {...vol, position: updates.position};
-    return volr;
-  }
 
-  const myCity = "city";
-  const myState = "state";
-
-  volr = {...vol, city: updates.city, state: updates.state};
+  volr = {...vol, ...updates};
   return volr; 
 
 }; // Code here
@@ -399,10 +375,12 @@ let updateVolunteer: UpdateVolunteer = (vol, updates) =>{
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
-  name = vol.name;
-  age = vol.age;
-  city = vol.city;
+  // let name, age, city; // Code here
+  // name = vol.name;
+  // age = vol.age;
+  // city = vol.city;
+  // const x = []
+  let {name, age, city} = vol; 
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
