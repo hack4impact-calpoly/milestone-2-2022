@@ -88,6 +88,7 @@ let findAverage: GetNumber; // Define lambda function here
 //console.log(findAverage(userData));
 
 // Question 2: Data Handling
+// Please AVOID USING FOR LOOPS for questions 2 through 4
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
