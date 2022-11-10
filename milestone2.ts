@@ -164,9 +164,8 @@ let updateVolunteer: UpdateVolunteer = (vol, updatedLocation) => {
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name = vol.name;
-  let age = vol.age;
-  let city = vol.city;
+  let name, age, city;
+  [name, age, city] = [vol.name, vol.age, vol.city]
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
