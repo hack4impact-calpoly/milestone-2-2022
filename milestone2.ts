@@ -87,9 +87,7 @@ const userData: Volunteer[] = [
 type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) => {
   let total = 0;
-  for (var volunteer of data) {
-    total += volunteer.age;
-  }
+  data.forEach((vol) => (total += vol.age))
   return total / data.length;
 };
 
@@ -100,18 +98,8 @@ let findAverage: GetNumber = (data) => {
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber = (data) => {
-  let count = 0;
-  for (var volunteer of data) {
-    if (volunteer.city == "SF") {
-      return count;
-    }
-    else {
-      count += 1;
-    }
-  }
-  return -1;
-};
+let findIndexAns: GetNumber = (data) => 
+  data.findIndex((vol) => vol.city === 'SF');
 
 // console.log(findIndexAns(userData));
 
@@ -119,15 +107,8 @@ let findIndexAns: GetNumber = (data) => {
 /* Use data handling function(s) to find all of the volunteers from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers = (data, minAge) => {
-  const applicable_volunteers : Volunteer[] = [];
-  for (var volunteer of data) {
-    if (volunteer.age > minAge && volunteer.state == "CA") {
-      applicable_volunteers.push(volunteer);
-    }
-  }
-  return applicable_volunteers;
-};
+let findCAOverN: GetVolunteers = (data, minAge) => 
+  data.filter((vol) => vol.state === 'CA' && vol.age > minAge);
 
 // console.log(findCAOverN(userData, 25));
 
@@ -135,13 +116,8 @@ let findCAOverN: GetVolunteers = (data, minAge) => {
 /* Use data handling function(s) to find the first staff member from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer = (data) => {
-  for (var volunteer of data) {
-    if (volunteer.city == "SB") {
-      return volunteer;
-    }
-  }
-};
+let findSBStaff: GetVolunteer = (data) => 
+  data.find((vol) => vol.city === 'SB')
 
 // console.log(findSBStaff(userData));
 
