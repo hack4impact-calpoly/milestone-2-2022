@@ -87,7 +87,7 @@ type GetNumber = (data: Volunteer[]) => number;
 let findAverage: GetNumber = (data) => {
   return data.reduce((total, next) => total + next.age, 0) / data.length;
 };
-console.log(findAverage(userData));
+//console.log(findAverage(userData));
 
 // Question 2: Data Handling
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
@@ -133,9 +133,11 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
-
-// let kyleClone: Volunteer = copyVolunteer(kyle);
+//let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (vol) => {
+  return {...vol}
+};
+let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
@@ -145,10 +147,12 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
-
-// let updatedLocation = { city: "Seattle", state: "WA" };
-// let kyleNew = updateVolunteer(kyleClone, updatedLocation);
+//let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (vol, updates) => {
+  return {...vol, ...updates}
+};
+let updatedLocation = { city: "Seattle", state: "WA" };
+let kyleNew = updateVolunteer(kyleClone, updatedLocation);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
@@ -157,11 +161,12 @@ let updateVolunteer: UpdateVolunteer; // Code here
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
 let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
+  //let name, age, city; // Code here
+  let {name, age, city} = vol;
   return `${name} is ${age} years old and lives in ${city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
+//let kyleInfo = getVolunteerInfo(kyleNew);
 //console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
@@ -171,8 +176,12 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
-
+//let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data) => {
+  let vol = data.find(volunteer => volunteer.city === "SLO" && volunteer.age > 40);
+  let updates = {position: "staff"};
+  return vol ? {...vol, ...updates} : undefined;
+};
 //console.log(daBigTest(userData));
 
 export {
