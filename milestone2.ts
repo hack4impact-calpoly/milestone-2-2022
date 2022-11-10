@@ -83,33 +83,41 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
-
-//console.log(findAverage(userData));
+//let findAverage: GetNumber; // Define lambda function here
+let findAverage: GetNumber = (data) => {
+  return data.reduce((total, next) => total + next.age, 0) / data.length;
+};
+console.log(findAverage(userData));
 
 // Question 2: Data Handling
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
-
+//let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data) => {
+  return data.findIndex(volunteer => volunteer.city === "SF");
+};
 //console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
 /* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
-
+//let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data, minAge) => {
+  return data.filter(volunteer => volunteer.state === "CA" && volunteer.age > minAge);
+};
 //console.log(findCAOverN(userData, 25));
 
 // Question 4: Searching Data
 /* Use data handling function(s) to find the first person from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
-
+//let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data) => {
+  return data.find(volunteer => volunteer.city === "SB");
+};
 //console.log(findSBStaff(userData));
 
 // Question 5: Spread Operator Part 1
