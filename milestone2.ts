@@ -143,10 +143,12 @@ let kyle: Volunteer = {
 /* Lets make a clone of Kyle above using the spread operator and assign it to kyleClone
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
-let copyVolunteer: CopyVolunteer; // Code here
+let copyVolunteer: CopyVolunteer = (vol: Volunteer) => {
+  return {...vol};
+} // Code here
 
-// let kyleClone: Volunteer = copyVolunteer(kyle);
-//console.log(kyleClone);
+let kyleClone: Volunteer = copyVolunteer(kyle);
+console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
