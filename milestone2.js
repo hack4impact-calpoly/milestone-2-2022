@@ -77,15 +77,21 @@ var findAverage = function (data) {
     return running_age_sum / data.length;
 }; // Define lambda function here
 exports.findAverage = findAverage;
-console.log(findAverage(userData));
+//console.log(findAverage(userData));
 // Question 2: Data Handling
 // Please AVOID USING FOR LOOPS for questions 2 through 4
 /* Use data handling function(s) to find the first index of someone from San Francisco (SF).
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-var findIndexAns; // Code here
+var findIndexAns = function (data) {
+    var cities = data.map(function (volunteer) { return volunteer.city; });
+    // Note to self: if brackets are present in body of lambda method, a return statement 
+    // is necessary.
+    return cities.findIndex(function (city) { return city === "SF"; });
+}; // Code here
 exports.findIndexAns = findIndexAns;
+console.log(findIndexAns(userData));
 var findCAOverN; // Code here
 exports.findCAOverN = findCAOverN;
 var findSBStaff; // Code here

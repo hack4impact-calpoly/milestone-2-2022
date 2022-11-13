@@ -93,7 +93,7 @@ let findAverage: GetNumber = (data: Volunteer[]) => {
   return running_age_sum / data.length;
 } // Define lambda function here
 
-console.log(findAverage(userData));
+//console.log(findAverage(userData));
 
 // Question 2: Data Handling
 // Please AVOID USING FOR LOOPS for questions 2 through 4
@@ -101,9 +101,14 @@ console.log(findAverage(userData));
   Return -1 if no one is from San Francisco.
   Hint: Use a lambda function as a value
 */
-let findIndexAns: GetNumber; // Code here
+let findIndexAns: GetNumber = (data: Volunteer[]) => {
+  const cities: string[] = data.map(volunteer => volunteer.city)
+  // Note to self: if brackets are present in body of lambda method, a return statement 
+  // is necessary.
+  return cities.findIndex(city => city === "SF");
+} // Code here
 
-//console.log(findIndexAns(userData));
+// console.log(findIndexAns(userData));
 
 // Question 3: Filtering data
 /* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
