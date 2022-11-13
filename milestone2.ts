@@ -85,6 +85,7 @@ const userData: Volunteer[] = [
 type GetNumber = (data: Volunteer[]) => number;
 
 let findAverage: GetNumber = (data: Volunteer[]) => {
+  // Sum all age properties of volunteers in inputted array
   let running_age_sum = 0;
   for(let volunteer of data)
   {
@@ -115,6 +116,7 @@ let findIndexAns: GetNumber = (data: Volunteer[]) => {
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
 let findCAOverN: GetVolunteers = (data: Volunteer[], minAge: number) => {
+  // Filter inputted array for objects with age > 40 and state == "CA"
   return data.filter(v => v.age > minAge && v.state == "CA" );
 }
 
@@ -144,10 +146,13 @@ let kyle: Volunteer = {
  */
 type CopyVolunteer = (vol: Volunteer) => Volunteer;
 let copyVolunteer: CopyVolunteer = (vol: Volunteer) => {
+  // Use the spread operator to return an (associative) array of key-value pairs,
+  // then immediately build an object based on those key-value pairs without
+  // making any edits to properties
   return {...vol};
 } // Code here
 
-let kyleClone: Volunteer = copyVolunteer(kyle);
+//let kyleClone: Volunteer = copyVolunteer(kyle);
 //console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
@@ -160,6 +165,8 @@ type UpdateVolunteer = (
 let updateVolunteer: UpdateVolunteer = (
   vol: Volunteer, 
   updates: Partial<Volunteer>) => {
+    // Return a new object with the old object's key-value pairs, 
+    // but with the key-value pairs defined in 'updates' overwriting any old value 
     return {
       ...vol,
       ...updates
@@ -167,8 +174,8 @@ let updateVolunteer: UpdateVolunteer = (
     }
   }// Code here
 
-let updatedLocation = { city: "Seattle", state: "WA" };
-let kyleNew = updateVolunteer(kyleClone, updatedLocation);
+//let updatedLocation = { city: "Seattle", state: "WA" };
+//let kyleNew = updateVolunteer(kyleClone, updatedLocation);
 //console.log(kyleNew);
 
 // Question 7: Object Destructuring
@@ -191,8 +198,11 @@ let getVolunteerInfo: GetVolunteerInfo = (vol: Volunteer) => {
  */
 
 let daBigTest: GetVolunteer = (data: Volunteer[]) => {
+  // Return the first object that matches the criteria described above
   let foundVolunteer: Volunteer | undefined = data.find(x => x.city == "SLO" && x.age > 40);
   
+  // If an object was actually found, overwrite position: "{old value}" with
+  // position: "staff"
   if(foundVolunteer != undefined)
     foundVolunteer = {
       ...foundVolunteer,

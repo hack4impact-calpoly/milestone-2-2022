@@ -80,6 +80,7 @@ var userData = [
     },
 ];
 var findAverage = function (data) {
+    // Sum all age properties of volunteers in inputted array
     var running_age_sum = 0;
     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
         var volunteer = data_1[_i];
@@ -103,6 +104,7 @@ var findIndexAns = function (data) {
 }; // Code here
 exports.findIndexAns = findIndexAns;
 var findCAOverN = function (data, minAge) {
+    // Filter inputted array for objects with age > 40 and state == "CA"
     return data.filter(function (v) { return v.age > minAge && v.state == "CA"; });
 };
 exports.findCAOverN = findCAOverN;
@@ -121,18 +123,20 @@ var kyle = {
     state: "CA"
 };
 var copyVolunteer = function (vol) {
+    // Use the spread operator to return an (associative) array of key-value pairs,
+    // then immediately build an object based on those key-value pairs without
+    // making any edits to properties
     return __assign({}, vol);
 }; // Code here
 exports.copyVolunteer = copyVolunteer;
-var kyleClone = copyVolunteer(kyle);
 var updateVolunteer = function (vol, updates) {
+    // Return a new object with the old object's key-value pairs, 
+    // but with the key-value pairs defined in 'updates' overwriting any old value 
     return __assign(__assign({}, vol), updates
     // Note to self: "the last definition of a property wins"
     );
 }; // Code here
 exports.updateVolunteer = updateVolunteer;
-var updatedLocation = { city: "Seattle", state: "WA" };
-var kyleNew = updateVolunteer(kyleClone, updatedLocation);
 var getVolunteerInfo = function (vol) {
     return "".concat(vol.name, " is ").concat(vol.age, " years old and lives in ").concat(vol.city);
 };
@@ -146,10 +150,12 @@ exports.getVolunteerInfo = getVolunteerInfo;
 /* these criteria, return undefined
  */
 var daBigTest = function (data) {
+    // Return the first object that matches the criteria described above
     var foundVolunteer = data.find(function (x) { return x.city == "SLO" && x.age > 40; });
+    // If an object was actually found, overwrite position: "{old value}" with
+    // position: "staff"
     if (foundVolunteer != undefined)
         foundVolunteer = __assign(__assign({}, foundVolunteer), { position: "staff" });
     return foundVolunteer;
 }; // Code here
 exports.daBigTest = daBigTest;
-console.log(daBigTest(userData));
