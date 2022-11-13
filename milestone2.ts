@@ -83,9 +83,17 @@ const userData: Volunteer[] = [
   Hint: user data is stored in the userData object above. 
 */
 type GetNumber = (data: Volunteer[]) => number;
-let findAverage: GetNumber; // Define lambda function here
 
-//console.log(findAverage(userData));
+let findAverage: GetNumber = (data: Volunteer[]) => {
+  let running_age_sum = 0;
+  for(let volunteer of data)
+  {
+    running_age_sum += volunteer.age;
+  }
+  return running_age_sum / data.length;
+} // Define lambda function here
+
+console.log(findAverage(userData));
 
 // Question 2: Data Handling
 // Please AVOID USING FOR LOOPS for questions 2 through 4
