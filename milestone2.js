@@ -91,9 +91,11 @@ var findIndexAns = function (data) {
     return cities.findIndex(function (city) { return city === "SF"; });
 }; // Code here
 exports.findIndexAns = findIndexAns;
-console.log(findIndexAns(userData));
-var findCAOverN; // Code here
+var findCAOverN = function (data, minAge) {
+    return data.filter(function (v) { return v.age > minAge && v.state == "CA"; });
+};
 exports.findCAOverN = findCAOverN;
+console.log(findCAOverN(userData, 25));
 var findSBStaff; // Code here
 exports.findSBStaff = findSBStaff;
 //console.log(findSBStaff(userData));

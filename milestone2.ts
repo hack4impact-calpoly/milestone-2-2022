@@ -114,7 +114,9 @@ let findIndexAns: GetNumber = (data: Volunteer[]) => {
 /* Use data handling function(s) to find all of the people from California (CA) over an age threshold n
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
-let findCAOverN: GetVolunteers; // Code here
+let findCAOverN: GetVolunteers = (data: Volunteer[], minAge: number) => {
+  return data.filter(v => v.age > minAge && v.state == "CA" );
+}
 
 //console.log(findCAOverN(userData, 25));
 
