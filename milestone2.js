@@ -1,5 +1,16 @@
 "use strict";
 // This is the data we'll be working with!
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 exports.__esModule = true;
 exports.daBigTest = exports.getVolunteerInfo = exports.updateVolunteer = exports.copyVolunteer = exports.findSBStaff = exports.findCAOverN = exports.findIndexAns = exports.findAverage = void 0;
 var userData = [
@@ -99,7 +110,7 @@ var findSBStaff = function (data) {
     return data.find(function (x) { return x.city == "SB"; });
 };
 exports.findSBStaff = findSBStaff;
-console.log(findSBStaff(userData));
+//console.log(findSBStaff(userData));
 // Question 5: Spread Operator Part 1
 var kyle = {
     name: "Kyle",
@@ -109,10 +120,20 @@ var kyle = {
     city: "SD",
     state: "CA"
 };
-var copyVolunteer; // Code here
+var copyVolunteer = function (vol) {
+    return __assign({}, vol);
+}; // Code here
 exports.copyVolunteer = copyVolunteer;
-var updateVolunteer; // Code here
+var kyleClone = copyVolunteer(kyle);
+var updateVolunteer = function (vol, updates) {
+    return __assign(__assign({}, vol), updates
+    // Note to self: "the last definition of a property wins"
+    );
+}; // Code here
 exports.updateVolunteer = updateVolunteer;
+var updatedLocation = { city: "Seattle", state: "WA" };
+var kyleNew = updateVolunteer(kyleClone, updatedLocation);
+console.log(kyleNew);
 var getVolunteerInfo = function (vol) {
     var name, age, city; // Code here
     return "".concat(name, " is ").concat(age, " years old and lives in ").concat(city);

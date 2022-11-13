@@ -148,7 +148,7 @@ let copyVolunteer: CopyVolunteer = (vol: Volunteer) => {
 } // Code here
 
 let kyleClone: Volunteer = copyVolunteer(kyle);
-console.log(kyleClone);
+//console.log(kyleClone);
 
 // Question 6: Spread Operator Part 2
 /* Next, lets use the spread operator to update your kyleClone object with the updatedLocation defined below and assign it to kyleNew
@@ -157,11 +157,19 @@ type UpdateVolunteer = (
   vol: Volunteer,
   updates: Partial<Volunteer>
 ) => Volunteer;
-let updateVolunteer: UpdateVolunteer; // Code here
+let updateVolunteer: UpdateVolunteer = (
+  vol: Volunteer, 
+  updates: Partial<Volunteer>) => {
+    return {
+      ...vol,
+      ...updates
+      // Note to self: "the last definition of a property wins"
+    }
+  }// Code here
 
-// let updatedLocation = { city: "Seattle", state: "WA" };
-// let kyleNew = updateVolunteer(kyleClone, updatedLocation);
-//console.log(kyleNew);
+let updatedLocation = { city: "Seattle", state: "WA" };
+let kyleNew = updateVolunteer(kyleClone, updatedLocation);
+console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
