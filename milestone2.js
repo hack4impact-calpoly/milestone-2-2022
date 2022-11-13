@@ -137,13 +137,19 @@ var getVolunteerInfo = function (vol) {
     return "".concat(vol.name, " is ").concat(vol.age, " years old and lives in ").concat(vol.city);
 };
 exports.getVolunteerInfo = getVolunteerInfo;
-var kyleInfo = getVolunteerInfo(kyleNew);
-console.log(kyleInfo);
+//let kyleInfo = getVolunteerInfo(kyleNew);
+//console.log(kyleInfo);
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the *first* person from
 /* San Luis Obispo (SLO) over the age of 40, and return an updated
 /* version of them with their position set to staff. If no one meets
 /* these criteria, return undefined
  */
-var daBigTest; // Code here
+var daBigTest = function (data) {
+    var foundVolunteer = data.find(function (x) { return x.city == "SLO" && x.age > 40; });
+    if (foundVolunteer != undefined)
+        foundVolunteer = __assign(__assign({}, foundVolunteer), { position: "staff" });
+    return foundVolunteer;
+}; // Code here
 exports.daBigTest = daBigTest;
+console.log(daBigTest(userData));

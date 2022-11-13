@@ -180,8 +180,8 @@ let getVolunteerInfo: GetVolunteerInfo = (vol: Volunteer) => {
   return `${vol.name} is ${vol.age} years old and lives in ${vol.city}`;
 };
 
-let kyleInfo = getVolunteerInfo(kyleNew);
-console.log(kyleInfo);
+//let kyleInfo = getVolunteerInfo(kyleNew);
+//console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the *first* person from 
@@ -190,7 +190,16 @@ console.log(kyleInfo);
 /* these criteria, return undefined
  */
 
-let daBigTest: GetVolunteer; // Code here
+let daBigTest: GetVolunteer = (data: Volunteer[]) => {
+  let foundVolunteer: Volunteer | undefined = data.find(x => x.city == "SLO" && x.age > 40);
+  
+  if(foundVolunteer != undefined)
+    foundVolunteer = {
+      ...foundVolunteer,
+      position: "staff"
+    };
+  return foundVolunteer;
+}// Code here
 
 //console.log(daBigTest(userData));
 
