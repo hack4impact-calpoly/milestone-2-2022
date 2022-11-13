@@ -124,7 +124,9 @@ let findCAOverN: GetVolunteers = (data: Volunteer[], minAge: number) => {
 /* Use data handling function(s) to find the first person from Santa Barbara (SB)
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
-let findSBStaff: GetVolunteer; // Code here
+let findSBStaff: GetVolunteer = (data: Volunteer[]) => {
+  return data.find(x => x.city == "SB");
+}
 
 //console.log(findSBStaff(userData));
 

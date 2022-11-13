@@ -95,10 +95,11 @@ var findCAOverN = function (data, minAge) {
     return data.filter(function (v) { return v.age > minAge && v.state == "CA"; });
 };
 exports.findCAOverN = findCAOverN;
-console.log(findCAOverN(userData, 25));
-var findSBStaff; // Code here
+var findSBStaff = function (data) {
+    return data.find(function (x) { return x.city == "SB"; });
+};
 exports.findSBStaff = findSBStaff;
-//console.log(findSBStaff(userData));
+console.log(findSBStaff(userData));
 // Question 5: Spread Operator Part 1
 var kyle = {
     name: "Kyle",
