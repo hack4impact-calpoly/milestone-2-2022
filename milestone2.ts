@@ -169,20 +169,19 @@ let updateVolunteer: UpdateVolunteer = (
 
 let updatedLocation = { city: "Seattle", state: "WA" };
 let kyleNew = updateVolunteer(kyleClone, updatedLocation);
-console.log(kyleNew);
+//console.log(kyleNew);
 
 // Question 7: Object Destructuring
 /* Now that we have our updated kyle, lets use object destructuring to get his name, age, and city
  */
 
 type GetVolunteerInfo = (vol: Volunteer) => String;
-let getVolunteerInfo: GetVolunteerInfo = (vol) => {
-  let name, age, city; // Code here
-  return `${name} is ${age} years old and lives in ${city}`;
+let getVolunteerInfo: GetVolunteerInfo = (vol: Volunteer) => {
+  return `${vol.name} is ${vol.age} years old and lives in ${vol.city}`;
 };
 
-// let kyleInfo = getVolunteerInfo(kyleNew);
-//console.log(kyleInfo);
+let kyleInfo = getVolunteerInfo(kyleNew);
+console.log(kyleInfo);
 
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the *first* person from 

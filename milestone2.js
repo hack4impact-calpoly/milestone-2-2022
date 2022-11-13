@@ -133,14 +133,12 @@ var updateVolunteer = function (vol, updates) {
 exports.updateVolunteer = updateVolunteer;
 var updatedLocation = { city: "Seattle", state: "WA" };
 var kyleNew = updateVolunteer(kyleClone, updatedLocation);
-console.log(kyleNew);
 var getVolunteerInfo = function (vol) {
-    var name, age, city; // Code here
-    return "".concat(name, " is ").concat(age, " years old and lives in ").concat(city);
+    return "".concat(vol.name, " is ").concat(vol.age, " years old and lives in ").concat(vol.city);
 };
 exports.getVolunteerInfo = getVolunteerInfo;
-// let kyleInfo = getVolunteerInfo(kyleNew);
-//console.log(kyleInfo);
+var kyleInfo = getVolunteerInfo(kyleNew);
+console.log(kyleInfo);
 // Question 8: Putting it All Together!
 /* Use all the skills we've covered today to get the *first* person from
 /* San Luis Obispo (SLO) over the age of 40, and return an updated
