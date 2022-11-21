@@ -103,13 +103,11 @@ let findAverage: GetNumber = (data) => {
 */
 
 let findIndexAns: GetNumber = (data) => {
-  for (let i=0; i<data.length; i++) {
-    if (data[i].city === "SF") {
-      return i;
-    }
-  }
-  return -1;
-}
+  let first = data.find(person => person.city === "SF");
+  if (first === undefined)
+    return -1;
+  return data.indexOf(first);
+};
 
 //console.log(findIndexAns(userData));
 
@@ -130,8 +128,8 @@ let findCAOverN: GetVolunteers = (data, minAge) => {
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
 let findSBStaff: GetVolunteer = (data) => {
-  let fromSB = data.filter(x => x.city === "SB");
-  return fromSB[0];
+  let fromSB = data.find(x => x.city === "SB");
+  return fromSB;
   };
  
 
@@ -193,9 +191,10 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
 
 type DaBigTest = (data: Volunteer[]) => Volunteer | undefined;
 let daBigTest: GetVolunteer = (data) => {
-  let fromSlo = data.filter(x => x.city === "SLO" && x.age > 40);
-  let first = fromSlo[0];
-  let firstClone = {...first}
+  let fromSlo = data.find(x => x.city === "SLO" && x.age > 40);
+  if (fromSlo === undefined)
+    return undefined;
+  let firstClone = {...fromSlo};
   firstClone.position = "staff";
   return firstClone;
 }; 
