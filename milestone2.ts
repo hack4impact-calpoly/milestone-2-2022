@@ -101,13 +101,7 @@ let findAverage: GetNumber = (data) => { // Define lambda function here
   Hint: Use a lambda function as a value
 */
 let findIndexAns: GetNumber = (data) => {  // Code here
-  for(let i=0; i<data.length; i++){
-    if (data[i].city === "SF") {
-      return i;
-    }
-  }
-
-  return -1;
+  return data.findIndex(x => x.city === "SF")
 };
 
 // console.log(findIndexAns(userData));
@@ -117,13 +111,7 @@ let findIndexAns: GetNumber = (data) => {  // Code here
  */
 type GetVolunteers = (data: Volunteer[], minAge: number) => Volunteer[];
 let findCAOverN: GetVolunteers = (data, minNumber) => { // Code here
-  let resData: Volunteer[] = []
-  for(let i=0; i<data.length; i++){
-    if (data[i].state === "CA" && data[i].age > minNumber) {
-      resData.push(data[i]);
-    }
-  }
-  return resData;
+  return data.filter(x => x.state === "CA" && x.age > minNumber);
 };
 
 // console.log(findCAOverN(userData, 25));
@@ -133,13 +121,7 @@ let findCAOverN: GetVolunteers = (data, minNumber) => { // Code here
  */
 type GetVolunteer = (data: Volunteer[]) => Volunteer | undefined;
 let findSBStaff: GetVolunteer = (data) => {
-  let resPerson: Volunteer = data[0];
-  for(let i=0; i<data.length; i++){
-    if (data[i].city === "SB") {
-      return (data[i]);
-    }
-  }
-  return resPerson;
+  return data.find(x => x.city === "SB")
 }; // Code here
 
 //console.log(findSBStaff(userData));
@@ -200,17 +182,16 @@ let getVolunteerInfo: GetVolunteerInfo = (vol) => {
  */
 
 let daBigTest: GetVolunteer = (data) => {
-  let resPerson: Volunteer = data[0];
-  for(let i=0; i<data.length; i++){
-    if (data[i].city === "SLO" && data[i].age > 40) {
-      data[i].position = "staff";
-      return data[i];
-
-    }
+  let resPerson: Volunteer | undefined = data.find(x => x.city === "SLO" && x.age > 40);
+  if(typeof resPerson !== 'undefined') {
+    resPerson = {...resPerson};
+    resPerson.position = "staff";
   }
+  return resPerson;
+  
 }; // Code here
 
-// console.log(daBigTest(userData));
+console.log(daBigTest(userData));
 
 export {
   Volunteer,
