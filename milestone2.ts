@@ -1,5 +1,4 @@
 // This is the data we'll be working with!
-
 interface Volunteer {
     name: string;
     age: number;
